@@ -52,7 +52,7 @@ if __name__ == "__main__":
 
     # Run
     question = "What are the approaches to Task Decomposition?"
-    docs = vectorstore.similarity_search(question)
+    docs = vectorstore.similarity_search(question, k=2, fetch_k=2)
     result = llm_chain(docs)
 
     # Output
