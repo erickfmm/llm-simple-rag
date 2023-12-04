@@ -10,4 +10,6 @@ RUN pip install langchain langchain-experimental llama-cpp-python sentence_trans
 
 COPY . .
 
+RUN python3 ./load_things.py
+
 CMD [ "python3", "./basic_rag.py" ]

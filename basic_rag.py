@@ -7,7 +7,7 @@ def make_splits():
 
     from langchain.text_splitter import RecursiveCharacterTextSplitter
 
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=200, chunk_overlap=0)
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=100)
     all_splits = text_splitter.split_documents(data)
     return all_splits
 
@@ -27,10 +27,12 @@ if __name__ == "__main__":
     # Callbacks support token-wise streaming
     callback_manager = CallbackManager([StreamingStdOutCallbackHandler()])
     
+    #https://api.python.langchain.com/en/stable/llms/langchain.llms.llamacpp.LlamaCpp.html
     llm = LlamaCpp(
         model_path="/usr/src/app/models/luna-ai-llama2-uncensored.Q2_K.gguf",
         temperature=0.75,
-        max_tokens=2000,
+        max_tokens=4098,
+        n_ctx=4098,
         top_p=1,
         callback_manager=callback_manager,
         verbose=True,  # Verbose is required to pass to the callback manager
@@ -52,7 +54,7 @@ if __name__ == "__main__":
 
     # Run
     question = "What are the approaches to Task Decomposition?"
-    docs = vectorstore.similarity_search(question, k=2, fetch_k=2)
+    docs = vectorstore.similarity_search(question, k=2, fetch_k=5)
     result = llm_chain(docs)
 
     # Output
