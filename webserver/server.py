@@ -2,8 +2,14 @@ from flask import Flask, render_template
 from flask_socketio import SocketIO, emit
 from datetime import datetime
 
-def rag_model_function(prompt1, prompt2):
-    return "Hola mundo"
+import os
+import sys
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
+from rag_model import rag_model_function
+
+#def rag_model_function(prompt1, prompt2):
+#    return "Hola mundo"
 
 
 app = Flask(__name__)
@@ -27,9 +33,10 @@ def user_message(data):
     prompt1 = data['prompt1']
     prompt2 = data['prompt2']
     emit('chat_message', {'message': format_message('user', "<div>"+str(prompt1)+"\n<hr>\n"+str(prompt2)+"</div>")}, broadcast=True)
-    response = rag_model_function(prompt1, prompt2)
+    response, docs = rag_model_function(prompt1, prompt2)
+    print("the docs are: ", docs)
     emit('chat_message', {'message': format_message('server', response)}, broadcast=True)
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    socketio.run(app, debug=True, host='0.0.0.0', port=5000)
 
