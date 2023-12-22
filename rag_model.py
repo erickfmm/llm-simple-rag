@@ -1,3 +1,5 @@
+from config import config
+
 
 def rag_model_function(prompt1, prompt2):
     from vectorstore import load_or_create_vectorstore
@@ -14,16 +16,21 @@ def rag_model_function(prompt1, prompt2):
 
     from langchain.chains import LLMChain
     from langchain.prompts import PromptTemplate
+    from langchain.schema import StrOutputParser
 
     # Prompt
     prompt = PromptTemplate.from_template(
-        prompt1+" {docs}" #Summarize the main themes in these retrieved docs: 
+        config["TOKEN_START"]+config["TOKEN_USER"]+prompt1+" {docs}"+config["TOKEN_ASISTANT"] #Summarize the main themes in these retrieved docs: 
     )
 
+    # Run
+    question = prompt2#"What are the approaches to Task Decomposition?"
+    docs = vectorstore.similarity_search(question, k=2, fetch_k=5)
+    
     #https://api.python.langchain.com/en/stable/llms/langchain.llms.llamacpp.LlamaCpp.html
     llm = LlamaCpp(
-        model_path="/usr/src/app/models/luna-ai-llama2-uncensored.Q2_K.gguf",
-        temperature=0.75,
+        model_path=config["model_filename"],
+        temperature=config["model_temperature"],
         max_tokens=4098,
         n_ctx=4098,
         top_p=1,
@@ -31,12 +38,13 @@ def rag_model_function(prompt1, prompt2):
         verbose=True,  # Verbose is required to pass to the callback manager
     )
 
-    # Chain
+    # Chain TODO: TEST
+    #runnable = prompt | llm() | StrOutputParser()
+    #result = runnable.invoke({"docs": docs})
+    
+    
+    # Chain Legacy
     llm_chain = LLMChain(llm=llm, prompt=prompt)
-
-    # Run
-    question = prompt2#"What are the approaches to Task Decomposition?"
-    docs = vectorstore.similarity_search(question, k=2, fetch_k=5)
     result = llm_chain(docs)
 
     # Output

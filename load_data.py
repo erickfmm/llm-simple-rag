@@ -1,16 +1,16 @@
-
+from config import config
 
 def make_splits():
     #from langchain.document_loaders import DirectoryLoader
 
-    #loader = DirectoryLoader('./data/curriculum nacional txt extracted', glob="**/*.txt", show_progress=True)
+    #loader = DirectoryLoader(config["data_folder"], glob="**/*.txt", show_progress=True)
     #data = loader.load()
     data = []
     import os
     print("to read data")
     i_file = 0
-    for filename in os.listdir('./data/curriculum nacional txt extracted'):
-        with open(os.path.join('./data/curriculum nacional txt extracted', filename), "r") as fobj:
+    for filename in os.listdir(config["data_folder"]):
+        with open(os.path.join(config["data_folder"], filename), "r") as fobj:
             data.append(fobj.read())
         i_file += 1
         if i_file % 1000 == 0:

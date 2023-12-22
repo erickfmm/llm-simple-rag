@@ -1,0 +1,11 @@
+langchain
+langchain-experimental
+llama-cpp-python
+sentence_transformers
+chromadb
+beautifulsoup4
+tqdm
+unstructured
+nltk
+flask
+flask-socketio
