@@ -1,0 +1,29 @@
+@startuml
+
+actor Admin
+actor User
+
+Admin -> Dockerfile :Build
+Dockerfile -> load_things : Download models
+Dockerfile -> webserver.server : Run
+
+User -> webserver.server : Ask question
+
+webserver.server -> RAG_Model : Question
+
+RAG_Model-> vectorstore.load_or_create_vectorstore : Ask similars
+
+vectorstore.load_or_create_vectorstore -> load_data.makesplits : Load Documents into DB
+
+load_data.makesplits -> utils.get_chunks : Chunk each Document
+
+utils.get_chunks --> load_data.makesplits : Chunks of text
+load_data.makesplits --> vectorstore.load_or_create_vectorstore : List of Documents
+
+vectorstore.load_or_create_vectorstore --> RAG_Model : vectorestore (ChromaDB)
+RAG_Model -> RAG_Model : Ask LLM Model
+RAG_Model -> webserver.server : Answer
+
+webserver.server -> User : Answer
+
+@enduml

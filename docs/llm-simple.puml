@@ -1,0 +1,73 @@
+@startuml
+allowmixing
+class vectorstore{
+make_vectorstore()
+load_vectorstore()
+load_or_create_vectorstore()
+}
+
+class utils {
+get_chunks(docstring, size, around, overlap, char_to_split, replace_to_char) -> List[str]
+}
+
+class RAG_Model {
+rag_model_function(self, prompt1, prompt2)
+}
+
+class load_things {
+}
+
+class load_data {
+make_splits()
+}
+
+class config {
+config_luna_Q2
+config_mixtral_Q5
+config_llama_es_Q2
+config_llama_es_Q5
+config_mixtral_es_Q5
+config
+}
+
+
+
+folder webserver {
+class server {
+
+}
+folder templates {
+file index
+}
+}
+
+folder models
+folder data
+
+() langchain
+() os
+() datetime
+() flask
+() flask_socketio
+
+config <-- load_data
+config <-- RAG_Model
+vectorstore <-- RAG_Model
+load_data <-- vectorstore
+vectorstore --> langchain
+vectorstore --> os
+RAG_Model --> langchain
+RAG_Model --> datetime
+load_data ---> langchain
+load_data --> utils
+
+vectorstore -> models
+RAG_Model -> models
+load_data -> data
+
+server ---> RAG_Model
+server --> index
+server --> datetime
+server --> flask
+server --> flask_socketio
+@enduml
