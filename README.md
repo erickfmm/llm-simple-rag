@@ -13,16 +13,16 @@ An experiment to build a simple RAG Application, capable of run any llamacpp-com
 # Diagrams
 Sequence diagram of the App:
 
-![Sequence diagram](https://github.com//erickfmm/ML-experiments/blob/master/docs/sequence.png?raw=true)
+![Sequence diagram](https://github.com//erickfmm/llm-simple-rag/blob/master/docs/sequence.png?raw=true)
 
-Class Diagram (Without dependencies):
+Class Diagram (without dependencies):
 
-![Class Diagram (Without dependencies)](https://github.com//erickfmm/ML-experiments/blob/master/docs/class-simplified.png?raw=true)
+![Class Diagram (without dependencies)](https://github.com//erickfmm/llm-simple-rag/blob/master/docs/class-simplified.png?raw=true)
 
 
 Class Diagram (with dependencies):
 
-![Class Diagram (with dependencies)](https://github.com//erickfmm/ML-experiments/blob/master/docs/class-full.png?raw=true)
+![Class Diagram (with dependencies)](https://github.com//erickfmm/llm-simple-rag/blob/master/docs/class-full.png?raw=true)
 
 # TODO
 
