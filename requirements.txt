@@ -1,7 +1,10 @@
 langchain
 langchain-experimental
 llama-cpp-python
+langchain-community
+transformers
 sentence_transformers
+tiktoken
 chromadb
 beautifulsoup4
 tqdm

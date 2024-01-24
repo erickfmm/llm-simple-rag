@@ -3,16 +3,16 @@ from config import config
 
 def make_vectorstore():
     all_splits = make_splits()
-    from langchain.embeddings import HuggingFaceEmbeddings
-    from langchain.vectorstores import Chroma
+    from langchain_community.embeddings import HuggingFaceEmbeddings
+    from langchain_community.vectorstores import Chroma
     print("to vector store")
     vectorstore = Chroma.from_documents(documents=all_splits, embedding=HuggingFaceEmbeddings(model_name=config["HuggingFaceEmbeddings"]), persist_directory=config["chromadb_file"])
     print("vector store saved")
     return vectorstore
 
 def load_vectorstore():
-    from langchain.embeddings import HuggingFaceEmbeddings
-    from langchain.vectorstores import Chroma
+    from langchain_community.embeddings import HuggingFaceEmbeddings
+    from langchain_community.vectorstores import Chroma
     print("to load vector store")
     db3 = Chroma(persist_directory=config["chromadb_file"], embedding_function=HuggingFaceEmbeddings(model_name=config["HuggingFaceEmbeddings"]))
     return db3

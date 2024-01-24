@@ -32,8 +32,11 @@ config_llama_es_Q2 = {
     "TOKEN_START": "",
     "TOKEN_STOP": "",
     "HuggingFaceEmbeddings": "dccuchile/bert-base-spanish-wwm-uncased",
+    "HuggingFaceTokenizer": "dccuchile/bert-base-spanish-wwm-uncased",
+    "SplitTokens_N": 500,
+    "SplitTokens_Overlap": 15,
     "chromadb_file": "./models/chroma_db",
-    "data_folder": "data/drive-download-20231222T025931Z-001",
+    "data_folder": "data/curriculum nacional txt extracted",
     "model_temperature": 0.3
 }
 config_llama_es_Q5 = {

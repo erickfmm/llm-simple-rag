@@ -15,7 +15,7 @@ class RAG_Model():
     def rag_model_function(self, prompt1, prompt2):
         print("RAG created at...", self.timestamp_created)
         from langchain.callbacks.manager import CallbackManager
-        from langchain.llms import LlamaCpp
+        from langchain_community.llms import LlamaCpp
         from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
         # Callbacks support token-wise streaming
         callback_manager = CallbackManager([StreamingStdOutCallbackHandler()])
@@ -37,7 +37,7 @@ class RAG_Model():
 
         # Run
         question = prompt2#"What are the approaches to Task Decomposition?"
-        docs = self.vectorstore.similarity_search(question, k=2, fetch_k=5)
+        docs = self.vectorstore.similarity_search(question, k=3)
         
         if self.llm is None:
         #https://api.python.langchain.com/en/stable/llms/langchain.llms.llamacpp.LlamaCpp.html
