@@ -7,6 +7,9 @@ config_luna_Q2 = {
     "TOKEN_START": "",
     "TOKEN_STOP": None,
     "HuggingFaceEmbeddings": "dccuchile/bert-base-spanish-wwm-uncased",
+    "HuggingFaceTokenizer": "dccuchile/bert-base-spanish-wwm-uncased",
+    "SplitTokens_N": 500,
+    "SplitTokens_Overlap": 15,
     "chromadb_file": "./models/chroma_db",
     "data_folder": "data/drive-download-20231222T025931Z-001",
     "model_temperature": 0.3
@@ -19,6 +22,9 @@ config_mixtral_Q5 = {
     "TOKEN_START": "<s>",
     "TOKEN_STOP": "</s>",
     "HuggingFaceEmbeddings": "dccuchile/bert-base-spanish-wwm-uncased",
+    "HuggingFaceTokenizer": "dccuchile/bert-base-spanish-wwm-uncased",
+    "SplitTokens_N": 500,
+    "SplitTokens_Overlap": 15,
     "chromadb_file": "./models/chroma_db",
     "data_folder": "data/drive-download-20231222T025931Z-001",
     "model_temperature": 0.3
@@ -29,8 +35,8 @@ config_llama_es_Q2 = {
     "model_filename": "models/llama-2-7b-ft-instruct-es.Q2_K.gguf",
     "TOKEN_USER": "A continuación hay una instrucción que describe una tarea. Escriba una respuesta que complete adecuadamente la solicitud.\n### Instrucción:\n",
     "TOKEN_ASISTANT": "\n\n### Respuesta:",
-    "TOKEN_START": "",
-    "TOKEN_STOP": "",
+    "TOKEN_START": "<s>",
+    "TOKEN_STOP": "</s>",
     "HuggingFaceEmbeddings": "dccuchile/bert-base-spanish-wwm-uncased",
     "HuggingFaceTokenizer": "dccuchile/bert-base-spanish-wwm-uncased",
     "SplitTokens_N": 500,
@@ -40,12 +46,15 @@ config_llama_es_Q2 = {
     "model_temperature": 0.3
 }
 config_llama_es_Q5 = {
-    "model_filename": "models/llama-2-7b-ft-instruct-es.Q2_K.gguf",
+    "model_filename": "models/llama-2-7b-ft-instruct-es.Q5_K_M.gguf",
     "TOKEN_USER": "A continuación hay una instrucción que describe una tarea. Escriba una respuesta que complete adecuadamente la solicitud.\n### Instrucción:\n",
     "TOKEN_ASISTANT": "\n\n### Respuesta:",
     "TOKEN_START": "",
     "TOKEN_STOP": "",
     "HuggingFaceEmbeddings": "dccuchile/bert-base-spanish-wwm-uncased",
+    "HuggingFaceTokenizer": "dccuchile/bert-base-spanish-wwm-uncased",
+    "SplitTokens_N": 500,
+    "SplitTokens_Overlap": 15,
     "chromadb_file": "./models/chroma_db",
     "data_folder": "data/drive-download-20231222T025931Z-001",
     "model_temperature": 0.3
@@ -57,6 +66,9 @@ config_mixtral_es_Q5 = {
     "TOKEN_START": "",
     "TOKEN_STOP": "",
     "HuggingFaceEmbeddings": "dccuchile/bert-base-spanish-wwm-uncased",
+    "HuggingFaceTokenizer": "dccuchile/bert-base-spanish-wwm-uncased",
+    "SplitTokens_N": 500,
+    "SplitTokens_Overlap": 15,
     "chromadb_file": "./models/chroma_db",
     "data_folder": "data/drive-download-20231222T025931Z-001",
     "model_temperature": 0.3

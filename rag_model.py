@@ -28,17 +28,26 @@ class RAG_Model():
 
         from langchain.chains import LLMChain
         from langchain.prompts import PromptTemplate
-        from langchain.schema import StrOutputParser
+        from langchain_core.prompts import ChatPromptTemplate
+        
 
         # Prompt
-        prompt = PromptTemplate.from_template(
-            config["TOKEN_START"]+config["TOKEN_USER"]+prompt1+" {docs}"+config["TOKEN_ASISTANT"] #Summarize the main themes in these retrieved docs: 
+        #prompt = PromptTemplate.from_template(
+        #    config["TOKEN_START"]+config["TOKEN_USER"]+prompt1+" {docs}"+config["TOKEN_ASISTANT"] #Summarize the main themes in these retrieved docs: 
+        #)
+        prompt = ChatPromptTemplate.from_template(
+            config["TOKEN_START"]+config["TOKEN_USER"]+prompt1+" {docs}"+config["TOKEN_ASISTANT"]
         )
 
         # Run
         question = prompt2#"What are the approaches to Task Decomposition?"
         docs = self.vectorstore.similarity_search(question, k=3)
-        
+        for d in docs:
+            print(d)
+            print("-"*15)
+        del self.vectorstore
+        self.vectorstore = None
+
         if self.llm is None:
         #https://api.python.langchain.com/en/stable/llms/langchain.llms.llamacpp.LlamaCpp.html
             self.llm = LlamaCpp(
@@ -55,14 +64,22 @@ class RAG_Model():
         #runnable = prompt | llm() | StrOutputParser()
         #result = runnable.invoke({"docs": docs})
         
-        
+        def format_docs(docs):
+            return "\n\n".join(doc.page_content for doc in docs)
         # Chain Legacy
-        llm_chain = LLMChain(llm=self.llm, prompt=prompt)
-        result = llm_chain(docs)
+        #llm_chain = LLMChain(llm=self.llm, prompt=prompt)
+        from langchain_core.output_parsers import StrOutputParser
+        llm_chain = (
+            {"docs": format_docs} 
+            | prompt 
+            | self.llm 
+            | StrOutputParser()
+            ) #.bind(stop=config["TOKEN_STOP"])
+        result = llm_chain.invoke(docs)
 
         # Output
-        print(result["text"])
-        return result["text"], docs
+        print(result)
+        return result, docs
 
 if __name__ == "__main__":
     import sys
