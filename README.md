@@ -23,7 +23,7 @@ Class Diagram (with dependencies):
 
 # TODO
 
-* Pydoc documentation
-* Config HTML View
-* Split Config and make a Class with Singleton
-* Download LLM models automatically
+- [ ] Pydoc documentation
+- [ ] Config HTML View
+- [x] Split Config and make a Class with Singleton
+- [ ] Download LLM models automatically

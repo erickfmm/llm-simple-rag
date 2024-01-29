@@ -10,7 +10,6 @@ class RAG_Model():
         print("Creating RAG model... at", self.timestamp_created)
         self.vectorstore = None
         self.llm = None
-        #self.vectorstore = load_or_create_vectorstore()
 
     def rag_model_function(self, prompt1, prompt2):
         print("RAG created at...", self.timestamp_created)
@@ -21,10 +20,8 @@ class RAG_Model():
         callback_manager = CallbackManager([StreamingStdOutCallbackHandler()])
         
         
-        # MY CODE:
         if self.vectorstore is None:
             self.vectorstore = load_or_create_vectorstore()
-        ## END
 
         from langchain.chains import LLMChain
         from langchain.prompts import PromptTemplate
@@ -32,16 +29,13 @@ class RAG_Model():
         
 
         # Prompt
-        #prompt = PromptTemplate.from_template(
-        #    config["TOKEN_START"]+config["TOKEN_USER"]+prompt1+" {docs}"+config["TOKEN_ASISTANT"] #Summarize the main themes in these retrieved docs: 
-        #)
         prompt = ChatPromptTemplate.from_template(
-            config["TOKEN_START"]+config["TOKEN_USER"]+prompt1+" {docs}"+config["TOKEN_ASISTANT"]
+            config.model.token_start+config.model.token_user+prompt1+" {docs}"+config.model.token_asistant
         )
 
         # Run
-        question = prompt2#"What are the approaches to Task Decomposition?"
-        docs = self.vectorstore.similarity_search(question, k=3)
+        question = prompt2
+        docs = self.vectorstore.similarity_search(question, k=config.k_documents)
         for d in docs:
             print(d)
             print("-"*15)
@@ -49,32 +43,28 @@ class RAG_Model():
         self.vectorstore = None
 
         if self.llm is None:
-        #https://api.python.langchain.com/en/stable/llms/langchain.llms.llamacpp.LlamaCpp.html
             self.llm = LlamaCpp(
-                model_path=config["model_filename"],
-                temperature=config["model_temperature"],
-                max_tokens=4098,
-                n_ctx=4098,
-                top_p=1,
+                model_path=config.model.filename,
+                temperature=config.model.temperature,
+                max_tokens=config.model.max_tokens,
+                n_ctx=config.model.n_context,
+                top_p=config.model.top_p,
                 callback_manager=callback_manager,
                 verbose=True,  # Verbose is required to pass to the callback manager
             )
 
-        # Chain TODO: TEST
-        #runnable = prompt | llm() | StrOutputParser()
-        #result = runnable.invoke({"docs": docs})
+        # Chain
         
         def format_docs(docs):
             return "\n\n".join(doc.page_content for doc in docs)
-        # Chain Legacy
-        #llm_chain = LLMChain(llm=self.llm, prompt=prompt)
+        
         from langchain_core.output_parsers import StrOutputParser
         llm_chain = (
             {"docs": format_docs} 
             | prompt 
-            | self.llm 
+            | self.llm #.bind(stop=config.model.token_stop)
             | StrOutputParser()
-            ) #.bind(stop=config["TOKEN_STOP"])
+            ) 
         result = llm_chain.invoke(docs)
 
         # Output
