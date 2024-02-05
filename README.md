@@ -10,6 +10,10 @@ An experiment to build a simple RAG Application, capable of run any llamacpp-com
  * In Windows run `build_docker.bat` and `run_docker.bat`
  * In Linux/Other run `sh build_docker.sh` and `sh run_docker.sh`
 
+# Screen shot
+Screehshot
+<img src="https://github.com/erickfmm/llm-simple-rag/blob/main/docs/capture.png?raw=true" alt="Screenshot"/>
+
 # Diagrams
 Sequence diagram of the App:
 <img src="https://github.com/erickfmm/llm-simple-rag/blob/main/docs/sequence.png?raw=true" alt="Sequence diagram"/>
