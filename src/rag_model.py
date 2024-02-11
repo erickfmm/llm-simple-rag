@@ -1,7 +1,9 @@
-from config import config
+from src.config.config import AppConfig
 
-from vectorstore import load_or_create_vectorstore
+from src.vectorstore import load_or_create_vectorstore
 from datetime import datetime
+import os
+import requests
 
 
 class RAG_Model():
@@ -30,12 +32,16 @@ class RAG_Model():
 
         # Prompt
         prompt = ChatPromptTemplate.from_template(
-            config.model.token_start+config.model.token_user+prompt1+" {docs}"+config.model.token_asistant
+            #AppConfig.get_config().model.token_start+\
+            AppConfig.get_config().model.token_user+\
+            prompt1+\
+            " {docs}"+\
+            AppConfig.get_config().model.token_asistant
         )
 
         # Run
         question = prompt2
-        docs = self.vectorstore.similarity_search(question, k=config.k_documents)
+        docs = self.vectorstore.similarity_search(question, k=AppConfig.get_config().k_documents)
         for d in docs:
             print(d)
             print("-"*15)
@@ -43,12 +49,15 @@ class RAG_Model():
         self.vectorstore = None
 
         if self.llm is None:
+            if not os.path.exists(AppConfig.get_config().model.filename):
+                r = requests.get(AppConfig.get_config().model.url)
+                open(AppConfig.get_config().model.filename, "wb").write(r.content)
             self.llm = LlamaCpp(
-                model_path=config.model.filename,
-                temperature=config.model.temperature,
-                max_tokens=config.model.max_tokens,
-                n_ctx=config.model.n_context,
-                top_p=config.model.top_p,
+                model_path=AppConfig.get_config().model.filename,
+                temperature=AppConfig.get_config().model.temperature,
+                max_tokens=AppConfig.get_config().model.max_tokens,
+                n_ctx=AppConfig.get_config().model.n_context,
+                top_p=AppConfig.get_config().model.top_p,
                 callback_manager=callback_manager,
                 verbose=True,  # Verbose is required to pass to the callback manager
             )

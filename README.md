@@ -30,4 +30,4 @@ Class Diagram (with dependencies):
 - [ ] Pydoc documentation
 - [ ] Config HTML View
 - [x] Split Config and make a Class with Singleton
-- [ ] Download LLM models automatically
+- [x] Download LLM models automatically

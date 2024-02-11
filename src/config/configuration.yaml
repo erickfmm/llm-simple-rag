@@ -1,0 +1,107 @@
+huggingface_embeddings: "dccuchile/bert-base-spanish-wwm-uncased"
+huggingface_tokenizer: "dccuchile/bert-base-spanish-wwm-uncased"
+splittokens_n: 500
+splittokens_overlap: 15
+chroma_path: "./models/chroma_db"
+data_folder: "./data/curriculum nacional txt extracted"
+global_temperature: 0.3
+k_documents: 3
+default_model: Mix_TinyLlama3x1B_q5
+models:
+  luna_Q2: 
+    TYPE: gguf
+    filename: ./models/luna-ai-llama2-uncensored.Q2_K.gguf
+    url: https://huggingface.co/TheBloke/Luna-AI-Llama2-Uncensored-GGUF/resolve/main/luna-ai-llama2-uncensored.Q2_K.gguf
+    n_context: 4098
+    #temperature: 0.3
+    max_tokens: 4098
+    top_p: 1
+    token_user: "USER: "
+    token_asistant: "\nASSISTANT: "
+    token_start: ""
+    token_stop: ""
+  mixtral_Q5:
+    TYPE: gguf
+    filename: ./models/mixtral-8x7b-instruct-v0.1.Q5_K_M.gguf
+    url: https://huggingface.co/TheBloke/Mixtral-8x7B-Instruct-v0.1-GGUF/raw/main/mixtral-8x7b-instruct-v0.1.Q5_K_M.gguf
+    n_context: 4098
+    #temperature: 
+    max_tokens: 4098
+    top_p: 1
+    token_user: "[INST] "
+    token_asistant: " [/INST]"
+    token_start: "<s>"
+    token_stop: "</s>"
+  #spanish
+  llama_es_Q2:
+    TYPE: gguf
+    filename: ./models/llama-2-7b-ft-instruct-es.Q2_K.gguf
+    url: https://huggingface.co/TheBloke/Llama-2-7B-ft-instruct-es-GGUF/resolve/main/llama-2-7b-ft-instruct-es.Q2_K.gguf
+    n_context: 4098
+    #temperature: 
+    max_tokens: 4098
+    top_p: 1
+    token_user: "[INST] "
+    token_asistant: " [/INST]"
+    token_start: <s>
+    token_stop: </s>
+  llama_es_Q5:
+    TYPE: gguf
+    filename: ./models/llama-2-7b-ft-instruct-es.Q5_K_M.gguf
+    url: https://huggingface.co/TheBloke/Llama-2-7B-ft-instruct-es-GGUF/resolve/main/llama-2-7b-ft-instruct-es.Q5_K_M.gguf
+    n_context: 4098
+    #temperature: 
+    max_tokens: 4098
+    top_p: 1
+    token_user: "A continuación hay una instrucción que describe una tarea. Escriba una respuesta que complete adecuadamente la solicitud.\n### Instrucción:\n"
+    token_asistant: "\n\n### Respuesta:"
+    token_start: ""
+    token_stop: ""
+  mixtral_es_Q5:
+    TYPE: gguf
+    filename: ./models/mixtral_spanish_ft.Q5_K_M.gguf
+    url: https://huggingface.co/TheBloke/mixtral_spanish_ft-GGUF/resolve/main/mixtral_spanish_ft.Q5_K_M.gguf
+    n_context: 4098
+    #temperature: 
+    max_tokens: 4098
+    top_p: 1
+    token_user: "<|user|>\n"
+    token_asistant: "\n<|assistant|>"
+    token_start: ""
+    token_stop: ""
+  tinyllama_Q5:
+    TYPE: gguf
+    filename: ./models/tinyllama-1.1b-chat-v1.0.Q5_K_M.gguf
+    url: https://huggingface.co/TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF/raw/main/tinyllama-1.1b-chat-v1.0.Q5_K_M.gguf
+    n_context: 2048
+    #temperature: 
+    max_tokens: 512
+    top_p: 1
+    token_user: "<|system|>\nSigue las instrucciones</s>\n<|user|>\n"
+    token_asistant: "\n<|assistant|>"
+    token_start: ""
+    token_stop: ""
+  Mix_TinyLlama3x1B_f16:
+    TYPE: gguf
+    filename: ./models/Mix_TinyLlama-3x1B_oasst2_chatML_Cluster_3_2_1_V1.f16.gguf
+    url: https://huggingface.co/erickfmm/Mix_TinyLlama-3x1B_oasst2_chatML_Cluster_3_2_1_V1-GGUF/resolve/main/Mix_TinyLlama-3x1B_oasst2_chatML_Cluster_3_2_1_V1.f16.gguf
+    n_context: 2048
+    #temperature: 
+    max_tokens: 700
+    top_p: 0.9
+    token_user: <|im_start|>system\nYou are a helpful AI assistant.<|im_end|>\n<|im_start|>user
+    token_asistant: <|im_end|>\n<|im_start|>assistant
+    token_start: 
+    token_stop: 
+  Mix_TinyLlama3x1B_q5:
+    TYPE: gguf
+    filename:  ./models/Mix_TinyLlama-3x1B_oasst2_chatML_Cluster_3_2_1_V1.q5_K_M.gguf
+    url: https://huggingface.co/erickfmm/Mix_TinyLlama-3x1B_oasst2_chatML_Cluster_3_2_1_V1-GGUF/resolve/main/Mix_TinyLlama-3x1B_oasst2_chatML_Cluster_3_2_1_V1.q5_K_M.gguf
+    n_context: 2048
+    #temperature: 
+    max_tokens: 700
+    top_p: 0.9
+    token_user: <|im_start|>system\nYou are a helpful AI assistant.<|im_end|>\n<|im_start|>user
+    token_asistant: <|im_end|>\n<|im_start|>assistant
+    token_start: ""
+    token_stop: ""

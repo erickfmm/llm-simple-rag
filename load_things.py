@@ -1,7 +1,7 @@
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from transformers import AutoTokenizer
-from config import config
+from src.config.config import AppConfig
 
 if __name__ == "__main__":
-	HuggingFaceEmbeddings(model_name=config.huggingface_embeddings)
-	tokenizer = AutoTokenizer.from_pretrained(config.huggingface_tokenizer)
+	HuggingFaceEmbeddings(model_name=AppConfig.get_config().huggingface_embeddings)
+	tokenizer = AutoTokenizer.from_pretrained(AppConfig.get_config().huggingface_tokenizer)

@@ -14,4 +14,4 @@ RUN pip install -r requirements.txt
 COPY . .
 RUN python3 ./load_things.py
 
-CMD [ "python3", "./webserver/server.py" ]
+CMD [ "python3", "./src/webserver/server.py" ]

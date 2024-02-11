@@ -4,9 +4,9 @@ from datetime import datetime
 
 import os
 import sys
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
 
-from rag_model import RAG_Model
+from src.rag_model import RAG_Model
 
 #def rag_model_function(prompt1, prompt2):
 #    return "Hola mundo"
@@ -26,6 +26,10 @@ def format_message(sender, message, docs):
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/config')
+def config():
+    return render_template('config.html')
 
 @socketio.on('connect')
 def test_connect(auth):
