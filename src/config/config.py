@@ -34,3 +34,11 @@ class AppConfig:
             k_documents=config_obj["k_documents"]
         )
         return cls._config
+    
+    @classmethod
+    def reset_config(cls):
+        cls._config = None
+    
+    @classmethod
+    def put_config(cls, config: Config):
+        cls._config = config

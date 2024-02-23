@@ -21,5 +21,5 @@ def make_splits():
     tokenizer = AutoTokenizer.from_pretrained(AppConfig.get_config().huggingface_tokenizer)
     tsplitter = TokenTextSplitter.from_huggingface_tokenizer(tokenizer, chunk_size=AppConfig.get_config().splittokens_n, chunk_overlap=AppConfig.get_config().splittokens_overlap, strip_whitespace=True)
     returned_docs = tsplitter.split_documents(data)
-    
+    print(len(returned_docs), " total chunked documents")
     return returned_docs

@@ -1,12 +1,12 @@
-huggingface_embeddings: "dccuchile/bert-base-spanish-wwm-uncased"
-huggingface_tokenizer: "dccuchile/bert-base-spanish-wwm-uncased"
+huggingface_embeddings: "dccuchile/albert-base-10-spanish"
+huggingface_tokenizer: "dccuchile/albert-base-10-spanish"
 splittokens_n: 500
 splittokens_overlap: 15
 chroma_path: "./models/chroma_db"
 data_folder: "./data/curriculum nacional txt extracted"
 global_temperature: 0.3
 k_documents: 3
-default_model: Mix_TinyLlama3x1B_q5
+default_model: tinyllama_Q5
 models:
   luna_Q2: 
     TYPE: gguf
