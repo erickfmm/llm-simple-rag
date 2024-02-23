@@ -75,6 +75,31 @@ class RAG_Model():
         print(result)
         return result
 
+    def answer_question_mt5(self, prompt: str, docs: typing.List[Document]) -> str:
+        from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+        model = AppConfig.get_config().model.filename
+        model_tokenizer = AppConfig.get_config().model.filename
+        tokenizer = AutoTokenizer.from_pretrained(model_tokenizer)
+        model = AutoModelForSeq2SeqLM.from_pretrained(model).to('cpu') #puedes cambiar a 'cuda' si tienes GPU
+
+        input_text =f"{AppConfig.get_config().model.token_start}{AppConfig.get_config().model.token_user} {prompt} {docs} {AppConfig.get_config().model.token_asistant}"
+
+        inputs = tokenizer(input_text, return_tensors="pt").to('cpu') #puedes cambiar a 'cuda' si tienes GPU
+
+        outputs = model.generate(inputs["input_ids"],
+                                do_sample = True,
+                                max_length = AppConfig.get_config().model.max_tokens, #puedes subir este parametro hasta 500
+                                num_return_sequences=AppConfig.get_config().model.num_return_sequences, #recomiendo hasta 6 para que no demore mucho
+                                top_k=AppConfig.get_config().model.top_k,
+                                top_p=AppConfig.get_config().model.top_p,
+                                )
+        detok_outputs = [tokenizer.decode(x, skip_special_tokens=True) for x in outputs]
+
+        for output in detok_outputs: 
+            print(output)
+            print("\n") # imprime un salto de linea para separar cada uno de los outputs (en el caso que num_return_sequences sea mayor que 1)
+        return "\n".join(detok_outputs)
+
     def rag_model_function(self, prompt1, prompt2):
         print("RAG created at...", self.timestamp_created)
         
@@ -82,6 +107,8 @@ class RAG_Model():
         docs = self.make_question(question)
         if AppConfig.get_config().model.TYPE == "gguf":
             result = self.answer_question_llamacpp(prompt1, docs)
+        elif AppConfig.get_config().model.TYPE == "mt5":
+            result = self.answer_question_mt5(prompt1, docs)
         else:
             raise NotImplementedError("Model type not implemented")
         return result, docs

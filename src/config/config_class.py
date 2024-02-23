@@ -6,7 +6,9 @@ class ModelCard:
                  n_context: int, 
                  temperature: float, 
                  max_tokens: int, 
-                 top_p, 
+                 num_return_sequences: int,
+                 top_k: float,
+                 top_p: float, 
                  token_user: str, 
                  token_asistant: str, 
                  token_start: str, 
@@ -17,6 +19,8 @@ class ModelCard:
         self.n_context = n_context
         self.temperature = temperature
         self.max_tokens = max_tokens
+        self.num_return_sequences = num_return_sequences
+        self.top_k = top_k
         self.top_p = top_p
         self.token_user = token_user
         self.token_asistant = token_asistant

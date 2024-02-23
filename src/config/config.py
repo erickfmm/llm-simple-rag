@@ -14,16 +14,18 @@ class AppConfig:
         cls._config = Config(
             model=ModelCard(
                 TYPE=default_model["TYPE"],
-                filename=default_model["filename"],
-                url=default_model["url"],
-                n_context=default_model["n_context"],
-                temperature=config_obj["global_temperature"],
-                max_tokens=default_model["max_tokens"],
+                filename=default_model["filename"] if "filename" in default_model else None,
+                url=default_model["url"] if "url" in default_model else None,
+                n_context=default_model["n_context"] if "n_context" in default_model else None,
+                temperature=default_model["temperature"] if "temperature" in default_model else config_obj["global_temperature"],
+                max_tokens=default_model["max_tokens"] if "max_tokens" in default_model else None,
+                num_return_sequences=default_model["num_return_sequences"] if "num_return_sequences" in default_model else None,
+                top_k=default_model["top_k"] if "top_k" in default_model else None,
                 top_p=default_model["top_p"],
-                token_user=default_model["token_user"],
-                token_asistant=default_model["token_asistant"],
-                token_start=default_model["token_start"],
-                token_stop=default_model["token_stop"]
+                token_user=default_model["token_user"] if "token_user" in default_model else "",
+                token_asistant=default_model["token_asistant"] if "token_asistant" in default_model else "",
+                token_start=default_model["token_start"] if "token_start" in default_model else "",
+                token_stop=default_model["token_stop"] if "token_stop" in default_model else ""
             ),
             huggingface_embeddings=config_obj["huggingface_embeddings"],
             huggingface_tokenizer=config_obj["huggingface_tokenizer"],

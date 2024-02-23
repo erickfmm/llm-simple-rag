@@ -105,3 +105,16 @@ models:
     token_asistant: <|im_end|>\n<|im_start|>assistant
     token_start: ""
     token_stop: ""
+  jalbarracin_mt5:
+    TYPE: mt5
+    filename: jalbarracin/spanish-alpaca-mT5
+    #n_context: 2048
+    #temperature: 
+    max_tokens: 500
+    num_return_sequences: 6
+    top_k: 50
+    top_p: 0.9
+    token_user: "instrut5: "
+    token_asistant: "<in></in>"
+    token_start: ""
+    token_stop: ""
