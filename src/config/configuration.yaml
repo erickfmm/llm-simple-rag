@@ -6,7 +6,9 @@ chroma_path: "./models/chroma_db"
 data_folder: "./data/curriculum nacional txt extracted"
 global_temperature: 0.3
 k_documents: 3
-default_model: tinyllama_Q5
+percentage_length_low: 0.1
+percentage_length_up: 0.9
+default_model: Mix_TinyLlama3x1B_f16
 models:
   luna_Q2: 
     TYPE: gguf

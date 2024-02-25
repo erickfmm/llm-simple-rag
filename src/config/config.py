@@ -31,6 +31,8 @@ class AppConfig:
             huggingface_tokenizer=config_obj["huggingface_tokenizer"],
             splittokens_n=config_obj["splittokens_n"],
             splittokens_overlap=config_obj["splittokens_overlap"],
+            percentage_length_low=config_obj["percentage_length_low"],
+            percentage_length_up=config_obj["percentage_length_up"],
             chroma_path=config_obj["chroma_path"],
             data_folder=config_obj["data_folder"],
             k_documents=config_obj["k_documents"]

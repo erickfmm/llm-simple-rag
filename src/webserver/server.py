@@ -21,7 +21,10 @@ def format_message(sender, message, docs):
     if sender == 'user':
         return f'<div class="row user-message"><p class="message-timestamp mb-1">{timestamp}</p><p>{message}</p></div>'
     else:
-        return f'<div class="row server-message"><p class="message-timestamp mb-1">{timestamp}</p><p>{message}<p><b>En base a los documentos:</b> <ol>{["<li>"+str(doc)+"</li>" for doc in docs]}</ol></p></p></div>'
+        docs = ["<li>"+str(doc).replace("\\n", "\n").replace("\n", "\n<br/>")+"</li>" for doc in docs]
+        docs = "\n".join(docs)
+        message = message.replace("\\n", "\n").replace("\n", "\n<br/>")
+        return f'<div class="row server-message"><p class="message-timestamp mb-1">{timestamp}</p><p>{message}<p><b>En base a los documentos:</b> <ol>{docs}</ol></p></p></div>'
 
 @app.route('/')
 def index():

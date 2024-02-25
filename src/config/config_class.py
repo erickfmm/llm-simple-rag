@@ -33,7 +33,9 @@ class Config:
                  huggingface_embeddings: str, 
                  huggingface_tokenizer: str, 
                  splittokens_n: int, 
-                 splittokens_overlap: int, 
+                 splittokens_overlap: int,
+                 percentage_length_low : float,
+                 percentage_length_up: float,
                  chroma_path: str,
                  data_folder: str,
                  k_documents: int):
@@ -42,6 +44,8 @@ class Config:
         self.huggingface_tokenizer = huggingface_tokenizer
         self.splittokens_n = splittokens_n
         self.splittokens_overlap = splittokens_overlap
+        self.percentage_length_low = percentage_length_low
+        self.percentage_length_up = percentage_length_up
         self.chroma_path = chroma_path
         self.data_folder = data_folder
         self.k_documents = k_documents
