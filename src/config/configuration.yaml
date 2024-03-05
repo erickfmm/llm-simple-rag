@@ -1,5 +1,7 @@
 huggingface_embeddings: "dccuchile/albert-base-10-spanish"
-huggingface_tokenizer: "dccuchile/albert-base-10-spanish"
+tokenizer_model: "cl100k_base"
+tokenizer: "tiktoken" # change to huggingface if using it
+regex_preprocessing: '[^a-zA-Z0-9áÁéÉíÍóÓúÚñ¿?¡!,; \n\.]'
 splittokens_n: 500
 splittokens_overlap: 15
 chroma_path: "./models/chroma_db"
@@ -8,7 +10,8 @@ global_temperature: 0.3
 k_documents: 3
 percentage_length_low: 0.1
 percentage_length_up: 0.9
-default_model: Mix_TinyLlama3x1B_f16
+runs_on: "cpu" # change to "cuda" if you have gpu compatible
+default_model: tinyllama_Q5
 models:
   luna_Q2: 
     TYPE: gguf
@@ -56,7 +59,7 @@ models:
     max_tokens: 4098
     top_p: 1
     token_user: "A continuación hay una instrucción que describe una tarea. Escriba una respuesta que complete adecuadamente la solicitud.\n### Instrucción:\n"
-    token_asistant: "\n\n### Respuesta:"
+    token_asistant: "\n\n### Respuesta: "
     token_start: ""
     token_stop: ""
   mixtral_es_Q5:
@@ -68,7 +71,7 @@ models:
     max_tokens: 4098
     top_p: 1
     token_user: "<|user|>\n"
-    token_asistant: "\n<|assistant|>"
+    token_asistant: "\n<|assistant|>\n"
     token_start: ""
     token_stop: ""
   tinyllama_Q5:
@@ -80,7 +83,7 @@ models:
     max_tokens: 512
     top_p: 1
     token_user: "<|system|>\nSigue las instrucciones</s>\n<|user|>\n"
-    token_asistant: "\n<|assistant|>"
+    token_asistant: "\n<|assistant|>\n"
     token_start: ""
     token_stop: ""
   Mix_TinyLlama3x1B_f16:
@@ -91,8 +94,8 @@ models:
     #temperature: 
     max_tokens: 700
     top_p: 0.9
-    token_user: <|im_start|>system\nYou are a helpful AI assistant.<|im_end|>\n<|im_start|>user
-    token_asistant: <|im_end|>\n<|im_start|>assistant
+    token_user: "<|im_start|>system\nYou are a helpful AI assistant.<|im_end|>\n<|im_start|>user\n"
+    token_asistant: "<|im_end|>\n<|im_start|>assistant\n"
     token_start: 
     token_stop: 
   Mix_TinyLlama3x1B_q5:
@@ -103,8 +106,8 @@ models:
     #temperature: 
     max_tokens: 700
     top_p: 0.9
-    token_user: <|im_start|>system\nYou are a helpful AI assistant.<|im_end|>\n<|im_start|>user
-    token_asistant: <|im_end|>\n<|im_start|>assistant
+    token_user: "<|im_start|>system\nYou are a helpful AI assistant.<|im_end|>\n<|im_start|>user\n"
+    token_asistant: "<|im_end|>\n<|im_start|>assistant\n"
     token_start: ""
     token_stop: ""
   jalbarracin_mt5:

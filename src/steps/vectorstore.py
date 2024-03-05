@@ -1,4 +1,4 @@
-from src.load_data import make_splits
+from src.steps.load_data import make_splits
 from src.config.config import AppConfig
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma

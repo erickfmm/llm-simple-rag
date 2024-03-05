@@ -31,17 +31,20 @@ class Config:
     def __init__(self, 
                  model: ModelCard, 
                  huggingface_embeddings: str, 
-                 huggingface_tokenizer: str, 
+                 tokenizer_model: str, 
+                 tokenizer : str,
+                 regex_preprocessing: str,
                  splittokens_n: int, 
                  splittokens_overlap: int,
                  percentage_length_low : float,
                  percentage_length_up: float,
                  chroma_path: str,
                  data_folder: str,
-                 k_documents: int):
+                 k_documents: int,
+                 runs_on: str):
         self.model = model
         self.huggingface_embeddings = huggingface_embeddings
-        self.huggingface_tokenizer = huggingface_tokenizer
+        self.tokenizer_model = tokenizer_model
         self.splittokens_n = splittokens_n
         self.splittokens_overlap = splittokens_overlap
         self.percentage_length_low = percentage_length_low
@@ -49,3 +52,6 @@ class Config:
         self.chroma_path = chroma_path
         self.data_folder = data_folder
         self.k_documents = k_documents
+        self.tokenizer = tokenizer
+        self.regex_preprocessing = regex_preprocessing
+        self.runs_on = runs_on
