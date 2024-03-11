@@ -11,19 +11,17 @@ User -> webserver.server : Ask question
 
 webserver.server -> RAG_Model : Question
 
-RAG_Model-> vectorstore.load_or_create_vectorstore : Ask similars
+RAG_Model -> steps.vectorstore.load_or_create_vectorstore : Ask similars
 
-vectorstore.load_or_create_vectorstore -> load_data.makesplits : Load Documents into DB
+steps.vectorstore.load_or_create_vectorstore -> steps.load_data.make_splits : Load Documents into DB
 
-load_data.makesplits -> utils.get_chunks : Chunk each Document
+steps.load_data.make_splits --> steps.vectorstore.load_or_create_vectorstore : List of Documents
 
-utils.get_chunks --> load_data.makesplits : Chunks of text
-load_data.makesplits --> vectorstore.load_or_create_vectorstore : List of Documents
+steps.vectorstore.load_or_create_vectorstore --> RAG_Model : vectorestore (ChromaDB)
+RAG_Model -> steps.answer_question_llm : Ask LLM Model
+steps.answer_question_llm -> RAG_Model : Answer, docs
+RAG_Model -> webserver.server : Answer, docs
 
-vectorstore.load_or_create_vectorstore --> RAG_Model : vectorestore (ChromaDB)
-RAG_Model -> RAG_Model : Ask LLM Model
-RAG_Model -> webserver.server : Answer
-
-webserver.server -> User : Answer
+webserver.server -> User : Answer, docs
 
 @enduml

@@ -1,14 +1,7 @@
 @startuml
 allowmixing
-class vectorstore{
-make_vectorstore()
-load_vectorstore()
-load_or_create_vectorstore()
-}
 
-class utils {
-get_chunks(docstring, size, around, overlap, char_to_split, replace_to_char) -> List[str]
-}
+
 
 class RAG_Model {
 rag_model_function(self, prompt1, prompt2)
@@ -16,18 +9,36 @@ rag_model_function(self, prompt1, prompt2)
 
 class load_things {
 }
-
+folder steps {
 class load_data {
-make_splits()
+    make_splits()
+    }
+class utils {
+get_chunks() -> List[str]
+}
+class vectorstore{
+make_vectorstore()
+load_vectorstore()
+load_or_create_vectorstore()
+}
+class Answer{
+    answer_question_llamacpp()
+    answer_question_mt5()
+
 }
 
+}
+
+folder config {
 class config {
-config_luna_Q2
-config_mixtral_Q5
-config_llama_es_Q2
-config_llama_es_Q5
-config_mixtral_es_Q5
-config
+
+}
+class config_class {
+
+}
+file configuration.yaml {
+
+}
 }
 
 
@@ -37,12 +48,19 @@ class server {
 
 }
 folder templates {
-file index
+file index.html {
+
+}
+file config.html {
+    
+}
 }
 }
 
 folder models
 folder data
+
+
 
 
 config <-- load_data
@@ -53,11 +71,12 @@ load_data <-- vectorstore
 load_data --> utils
 
 vectorstore --> models
-RAG_Model --> models
+RAG_Model ---> Answer
 load_data --> data
+Answer ---> models
 
 server --> RAG_Model
-server --> index
+server --> index.html
 
 
 @enduml
