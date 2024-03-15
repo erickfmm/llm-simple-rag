@@ -21,6 +21,7 @@ models:
     #temperature: 0.3
     max_tokens: 4098
     top_p: 1
+    default_prompt_asistant: Null
     token_user: "USER: "
     token_asistant: "\nASSISTANT: "
     token_start: ""
@@ -33,6 +34,7 @@ models:
     #temperature: 
     max_tokens: 4098
     top_p: 1
+    default_prompt_asistant: Null
     token_user: "[INST] "
     token_asistant: " [/INST]"
     token_start: "<s>"
@@ -46,6 +48,7 @@ models:
     #temperature: 
     max_tokens: 4098
     top_p: 1
+    default_prompt_asistant: Null
     token_user: "[INST] "
     token_asistant: " [/INST]"
     token_start: <s>
@@ -58,6 +61,7 @@ models:
     #temperature: 
     max_tokens: 4098
     top_p: 1
+    default_prompt_asistant: A continuación hay una instrucción que describe una tarea. Escriba una respuesta que complete adecuadamente la solicitud.
     token_user: "A continuación hay una instrucción que describe una tarea. Escriba una respuesta que complete adecuadamente la solicitud.\n### Instrucción:\n"
     token_asistant: "\n\n### Respuesta: "
     token_start: ""
@@ -70,6 +74,7 @@ models:
     #temperature: 
     max_tokens: 4098
     top_p: 1
+    default_prompt_asistant: Null
     token_user: "<|user|>\n"
     token_asistant: "\n<|assistant|>\n"
     token_start: ""
@@ -82,6 +87,7 @@ models:
     #temperature: 
     max_tokens: 512
     top_p: 1
+    default_prompt_asistant: Sigue las instrucciones
     token_user: "<|system|>\nSigue las instrucciones</s>\n<|user|>\n"
     token_asistant: "\n<|assistant|>\n"
     token_start: ""
@@ -94,6 +100,7 @@ models:
     #temperature: 
     max_tokens: 700
     top_p: 0.9
+    default_prompt_asistant: You are a helpful AI assistant.
     token_user: "<|im_start|>system\nYou are a helpful AI assistant.<|im_end|>\n<|im_start|>user\n"
     token_asistant: "<|im_end|>\n<|im_start|>assistant\n"
     token_start: 
@@ -106,6 +113,7 @@ models:
     #temperature: 
     max_tokens: 700
     top_p: 0.9
+    default_prompt_asistant: You are a helpful AI assistant.
     token_user: "<|im_start|>system\nYou are a helpful AI assistant.<|im_end|>\n<|im_start|>user\n"
     token_asistant: "<|im_end|>\n<|im_start|>assistant\n"
     token_start: ""

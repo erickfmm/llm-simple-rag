@@ -12,13 +12,19 @@ class Answer:
         
     def answer_question_llamacpp(self, prompt: str, docs: typing.List[Document]) -> str:
         from langchain_core.prompts import ChatPromptTemplate
+        from langchain.prompts import HumanMessagePromptTemplate, SystemMessagePromptTemplate
         # Prompt
-        prompt = ChatPromptTemplate.from_template(
-            AppConfig.get_config().model.token_user+\
-            prompt+\
-            " {docs}"+\
-            AppConfig.get_config().model.token_asistant
-        )
+        if AppConfig.get_config().model.default_prompt_asistant is not None:
+            messages = [
+                SystemMessagePromptTemplate.from_template(AppConfig.get_config().model.default_prompt_asistant),
+                HumanMessagePromptTemplate.from_template(prompt+" {docs}")
+            ]
+        else:
+            messages = [
+                HumanMessagePromptTemplate.from_template(prompt+" {docs}")
+            ]
+        prompt = ChatPromptTemplate.from_messages(messages)
+        print(prompt)
 
         from langchain.callbacks.manager import CallbackManager
         from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler

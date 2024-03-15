@@ -22,6 +22,7 @@ class AppConfig:
                 num_return_sequences=default_model["num_return_sequences"] if "num_return_sequences" in default_model else 1,
                 top_k=default_model["top_k"] if "top_k" in default_model else 0,
                 top_p=default_model["top_p"] if "top_p" in default_model else 0,
+                default_prompt_asistant = default_model["default_prompt_asistant"] if "default_prompt_asistant" in default_model else None,
                 token_user=default_model["token_user"] if "token_user" in default_model else "",
                 token_asistant=default_model["token_asistant"] if "token_asistant" in default_model else "",
                 token_start=default_model["token_start"] if "token_start" in default_model else "",

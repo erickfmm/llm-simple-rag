@@ -9,6 +9,7 @@ class ModelCard:
                  num_return_sequences: int,
                  top_k: float,
                  top_p: float, 
+                 default_prompt_asistant: str,
                  token_user: str, 
                  token_asistant: str, 
                  token_start: str, 
@@ -22,6 +23,7 @@ class ModelCard:
         self.num_return_sequences = num_return_sequences
         self.top_k = top_k
         self.top_p = top_p
+        self.default_prompt_asistant = default_prompt_asistant
         self.token_user = token_user
         self.token_asistant = token_asistant
         self.token_start = token_start
