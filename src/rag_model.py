@@ -1,6 +1,6 @@
 from src.config.config import AppConfig
 from langchain_core.documents.base import Document
-from src.steps.vectorstore import load_or_create_vectorstore
+from src.steps.vectorstore import load_or_create_vectorstore, retrieve
 from src.steps.answer_question_llm import Answer
 from datetime import datetime
 import typing
@@ -17,7 +17,9 @@ class RAG_Model():
             self.vectorstore = load_or_create_vectorstore()
         # Run
         
-        docs = self.vectorstore.similarity_search(question, k=AppConfig.get_config().k_documents)
+        retriever = retrieve(vectorstore=self.vectorstore, k = AppConfig.get_config().k_documents, filters=None)
+        docs = retriever.get_relevant_documents(question)
+        print(docs)
         for d in docs:
             print(d)
             print("-"*15)

@@ -5,7 +5,7 @@ regex_preprocessing: '[^a-zA-Z0-9áÁéÉíÍóÓúÚñ¿?¡!,; \n\.]'
 splittokens_n: 500
 splittokens_overlap: 15
 chroma_path: "./models/chroma_db"
-data_folder: "./data/curriculum nacional txt extracted"
+data_folder: "./data/"
 global_temperature: 0.3
 k_documents: 3
 percentage_length_low: 0.1

@@ -31,3 +31,10 @@ def load_or_create_vectorstore():
             return make_vectorstore()
     else:
         return make_vectorstore()
+    
+def retrieve(vectorstore, k, filters:dict):
+    from langchain_core.vectorstores import VectorStoreRetriever
+    if filters is not None:
+        return VectorStoreRetriever(vectorstore=vectorstore, k=k, search_kwargs=filters)
+    else:
+        return VectorStoreRetriever(vectorstore=vectorstore, k=k)
