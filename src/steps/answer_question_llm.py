@@ -36,15 +36,22 @@ class Answer:
             if not os.path.exists(AppConfig.get_config().model.filename):
                 r = requests.get(AppConfig.get_config().model.url)
                 open(AppConfig.get_config().model.filename, "wb").write(r.content)
-            self.model = LlamaCpp(
-                model_path=AppConfig.get_config().model.filename,
-                temperature=AppConfig.get_config().model.temperature,
-                max_tokens=AppConfig.get_config().model.max_tokens,
-                n_ctx=AppConfig.get_config().model.n_context,
-                top_p=AppConfig.get_config().model.top_p,
-                callback_manager=callback_manager,
-                verbose=True,  # Verbose is required to pass to the callback manager
-            )
+            if AppConfig.get_config().model.max_tokens is None:
+                self.model = LlamaCpp(
+                    model_path=AppConfig.get_config().model.filename,
+                    callback_manager=callback_manager,
+                    verbose=True,  # Verbose is required to pass to the callback manager
+                )
+            else:
+                self.model = LlamaCpp(
+                    model_path=AppConfig.get_config().model.filename,
+                    temperature=AppConfig.get_config().model.temperature,
+                    max_tokens=AppConfig.get_config().model.max_tokens,
+                    n_ctx=AppConfig.get_config().model.n_context,
+                    top_p=AppConfig.get_config().model.top_p,
+                    callback_manager=callback_manager,
+                    verbose=True,  # Verbose is required to pass to the callback manager
+                )
 
         # Chain
         from langchain_core.output_parsers import StrOutputParser

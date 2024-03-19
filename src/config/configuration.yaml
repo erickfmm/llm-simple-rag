@@ -1,17 +1,17 @@
 huggingface_embeddings: "dccuchile/albert-base-10-spanish"
 tokenizer_model: "cl100k_base"
 tokenizer: "tiktoken" # change to huggingface if using it
-regex_preprocessing: '[^a-zA-Z0-9áÁéÉíÍóÓúÚñ¿?¡!,; \n\.]'
+regex_preprocessing: '[^a-zA-Z0-9áÁéÉíÍóÓúÚñÑ¿?¡!,;:\(\)\\\/\°\- \n\.]'
 splittokens_n: 500
 splittokens_overlap: 15
 chroma_path: "./models/chroma_db"
 data_folder: "./data/"
 global_temperature: 0.3
 k_documents: 3
-percentage_length_low: 0.1
-percentage_length_up: 0.9
+percentage_length_low: 0
+percentage_length_up: 1
 runs_on: "cpu" # change to "cuda" if you have gpu compatible
-default_model: tinyllama_Q5
+default_model: tinyllama_ES_Q8
 models:
   luna_Q2: 
     TYPE: gguf
@@ -131,3 +131,11 @@ models:
     token_asistant: "<in></in>"
     token_start: ""
     token_stop: ""
+  tinyllama_ES_Q8:
+    TYPE: gguf
+    url: https://huggingface.co/biololab/tinyllama-spanish_8bit/resolve/main/tinyllama-spanish_8bit-unsloth.Q8_0.gguf
+    filename: ./models/tinyllama-spanish_8bit-unsloth.Q8_0.gguf
+  tinyllama_ES_Q16:
+    TYPE: gguf
+    url: https://huggingface.co/biololab/tinyllama-spanish_16bit/resolve/main/tinyllama-spanish_16bit-unsloth.F16.gguf
+    filename: ./models/tinyllama-spanish_16bit-unsloth.F16.gguf
