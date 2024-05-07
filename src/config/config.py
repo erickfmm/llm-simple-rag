@@ -31,13 +31,15 @@ class AppConfig:
             huggingface_embeddings=config_obj["huggingface_embeddings"],
             tokenizer_model=config_obj["tokenizer_model"],
             tokenizer = config_obj["tokenizer"],
-            regex_preprocessing = config_obj["regex_preprocessing"],
+            regex_preprocessing = config_obj["regex_preprocessing"] if "regex_preprocessing" in config_obj else None,
             splittokens_n=config_obj["splittokens_n"],
             splittokens_overlap=config_obj["splittokens_overlap"],
             percentage_length_low=config_obj["percentage_length_low"],
             percentage_length_up=config_obj["percentage_length_up"],
             chroma_path=config_obj["chroma_path"],
-            data_folder=config_obj["data_folder"],
+            data_folder=config_obj["data_folder"] if "data_folder" in config_obj else None,
+            data_file=config_obj["data_file"] if "data_file" in config_obj else None,
+            data_file_column=config_obj["data_file_column"] if "data_file_column" in config_obj else None,
             k_documents=config_obj["k_documents"],
             runs_on= config_obj["runs_on"]
         )

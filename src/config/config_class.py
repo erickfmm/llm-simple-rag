@@ -42,6 +42,8 @@ class Config:
                  percentage_length_up: float,
                  chroma_path: str,
                  data_folder: str,
+                 data_file: str,
+                 data_file_column: str,
                  k_documents: int,
                  runs_on: str):
         self.model = model
@@ -52,6 +54,8 @@ class Config:
         self.percentage_length_low = percentage_length_low
         self.percentage_length_up = percentage_length_up
         self.chroma_path = chroma_path
+        self.data_file = data_file
+        self.data_file_column = data_file_column
         self.data_folder = data_folder
         self.k_documents = k_documents
         self.tokenizer = tokenizer

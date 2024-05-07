@@ -38,3 +38,16 @@ def retrieve(vectorstore, k, filters:dict):
         return VectorStoreRetriever(vectorstore=vectorstore, k=k, search_kwargs=filters)
     else:
         return VectorStoreRetriever(vectorstore=vectorstore, k=k)
+    
+
+def get_metadata_values(vectorstore):
+    all_metadatas  = vectorstore.get(include=["metadatas"]).get('metadatas')
+    all_distinct_metadatas = dict()
+    keys = set()
+    for x_ in all_metadatas:
+        for k in x_.keys():
+            keys.add(k)
+    for key in keys:
+        distinct_keys = set([x.get(key) for x  in all_metadatas])
+        all_distinct_metadatas[key] = distinct_keys
+    return all_distinct_metadatas

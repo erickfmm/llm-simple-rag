@@ -49,6 +49,7 @@ class Answer:
                     max_tokens=AppConfig.get_config().model.max_tokens,
                     n_ctx=AppConfig.get_config().model.n_context,
                     top_p=AppConfig.get_config().model.top_p,
+                    #stop=[AppConfig.get_config().model.token_stop],
                     callback_manager=callback_manager,
                     verbose=True,  # Verbose is required to pass to the callback manager
                 )

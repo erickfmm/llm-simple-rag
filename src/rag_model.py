@@ -1,6 +1,6 @@
 from src.config.config import AppConfig
 from langchain_core.documents.base import Document
-from src.steps.vectorstore import load_or_create_vectorstore, retrieve
+from src.steps.vectorstore import load_or_create_vectorstore, retrieve, get_metadata_values
 from src.steps.answer_question_llm import Answer
 from datetime import datetime
 import typing
@@ -19,6 +19,7 @@ class RAG_Model():
         
         retriever = retrieve(vectorstore=self.vectorstore, k = AppConfig.get_config().k_documents, filters=None)
         docs = retriever.get_relevant_documents(question)
+        print(get_metadata_values(self.vectorstore))
         print(docs)
         for d in docs:
             print(d)

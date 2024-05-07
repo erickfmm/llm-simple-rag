@@ -5,7 +5,9 @@ regex_preprocessing: '[^a-zA-Z0-9áÁéÉíÍóÓúÚñÑ¿?¡!,;:\(\)\\\/\°\- 
 splittokens_n: 500
 splittokens_overlap: 15
 chroma_path: "./models/chroma_db"
-data_folder: "./data/"
+#data_folder: "./data/"
+data_file: "./data/data.csv"
+data_file_column: "Objetivo de Aprendizaje "
 global_temperature: 0.3
 k_documents: 3
 percentage_length_low: 0
@@ -139,3 +141,13 @@ models:
     TYPE: gguf
     url: https://huggingface.co/biololab/tinyllama-spanish_16bit/resolve/main/tinyllama-spanish_16bit-unsloth.F16.gguf
     filename: ./models/tinyllama-spanish_16bit-unsloth.F16.gguf
+  llama3_8b_1048k_Q8:
+    TYPE: gguf
+    url: https://huggingface.co/crusoeai/Llama-3-8B-Instruct-Gradient-1048k-GGUF/raw/main/llama-3-8b-instruct-gradient-1048k.Q8_0.gguf
+    filename: ./models/llama-3-8b-instruct-gradient-1048k.Q8_0.gguf
+    token_stop: 128009
+  llama3_8b_1048k_Q5KM:
+    TYPE: gguf
+    url: https://huggingface.co/crusoeai/Llama-3-8B-Instruct-Gradient-1048k-GGUF/raw/main/llama-3-8b-instruct-gradient-1048k.Q5_K_M.gguf
+    filename: ./models/llama-3-8b-instruct-gradient-1048k.Q5_K_M.gguf
+    token_stop: 128009
